@@ -1,0 +1,47 @@
+syntax = "proto3";
+option java_package = "com.nowcent.ham.pb";
+option java_multiple_files = true;
+option go_package = "pb/ham";
+import "google/protobuf/any.proto";
+
+enum CourseScoreItemType {
+  COURSE_SCORE_ITEM_TYPE_NONE = 0;
+  COURSE_SCORE_ITEM_TYPE_COURSE_NAME = 1;
+  COURSE_SCORE_ITEM_TYPE_INSTRUCTOR_NAME = 2;
+}
+
+message GetCourseScoreItemRequest {
+  optional string id = 1;
+  optional string course_name = 2;
+  optional string instructor = 3;
+  repeated CourseScoreRangeRequestItem range = 4;
+}
+
+message GetCourseScoreItemResponse {
+  CourseScoreItem item = 1;
+}
+
+message CourseScoreItem {
+  string name = 1;
+  string instructor = 2;
+  double average = 3;
+  int32 total = 4;
+  repeated CourseScoreRangeResponseItem range = 5;
+  string id = 6;
+}
+
+message CourseScoreRangeRequestItem {
+  int32 from = 1;
+  int32 to = 2;
+}
+
+message CourseScoreRangeResponseItem {
+  int32 from = 1;
+  int32 to = 2;
+  int32 total = 3;
+  string color = 4;
+}
+
+service GetCourseScoreService {
+  rpc GetCourseScoreItem(GetCourseScoreItemRequest) returns (GetCourseScoreItemResponse);
+}
