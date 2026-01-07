@@ -21,8 +21,6 @@ message SearchCourseResponse {
   repeated SearchCourseHitItem item = 1;
 }
 
-// CourseScoreItemType is now in common.proto
-
 message SearchCourseHitItem {
   CourseScoreItemType type = 1;
   string value = 2;
